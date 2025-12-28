@@ -12,6 +12,11 @@ public class Order {
     private Integer orderId;
     private double amount;
     @Enumerated(EnumType.STRING)
+
+    private String fileName;
+    private String fileType;
+    private byte[] imageData;
+
     private OrderStatus orderStatus = OrderStatus.PENDING;
     public Order(){
         this.amount = 0;
@@ -39,5 +44,29 @@ public class Order {
 
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
+    }
+
+    public byte[] getImageData() {
+        return imageData;
+    }
+
+    public void setImageData(byte[] imageData) {
+        this.imageData = imageData;
     }
 }

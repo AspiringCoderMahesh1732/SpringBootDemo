@@ -9,9 +9,12 @@ import com.example.SpringConcepts.service.WashingMachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -89,5 +92,15 @@ public class WashingMachineController {
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteOrderById(@RequestParam Integer orderId){
         return washingMachineService.deleteOrderById(orderId);
+    }
+
+    @PostMapping("/image")
+    public ResponseEntity<?> addImage(@RequestPart("order") Order order, @RequestPart("image") MultipartFile imageDetails) throws IOException {
+        return washingMachineService.addImage(imageDetails,order);
+    }
+
+    @ExceptionHandler(IOException.class)
+    public ResponseEntity<?> sendIoException(IOException ioException){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ioException.getMessage());
     }
 }

@@ -12,7 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,5 +69,13 @@ public class WashingMachineService {
     public ResponseEntity<String> deleteOrderById(Integer orderId){
         orderRepo.deleteById(orderId);
         return ResponseEntity.ok("deleted order with given id");
+    }
+
+
+    public ResponseEntity<?> addImage(MultipartFile imageDetails,Order order) throws IOException {
+        order.setFileName(imageDetails.getOriginalFilename());
+        order.setFileType(imageDetails.getContentType());
+        order.setImageData(imageDetails.getBytes());
+        return ResponseEntity.status(HttpStatus.CREATED).body(order);
     }
 }

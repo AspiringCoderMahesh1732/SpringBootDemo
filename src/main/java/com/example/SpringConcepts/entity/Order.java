@@ -15,6 +15,7 @@ public class Order {
 
     private String fileName;
     private String fileType;
+    @Lob
     private byte[] imageData;
 
     private OrderStatus orderStatus = OrderStatus.PENDING;

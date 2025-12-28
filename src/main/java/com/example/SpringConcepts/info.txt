@@ -1,0 +1,21 @@
+> method (businessLogic + crossCuttingConcerns)
+
+but crossCuttingConcerns is overhead to method so we separate them using Aspect.
+
+Join Point > method where we keep our business logic.
+
+Advise > method where we keep cross cutting concerns.
+
+request will be sent to Advise first and then moved to join point.
+
+for which class or which method this Aspect should be applied will be defined by using PointCut expressions.
+
+spring AOP is proxy based.
+
+PointCut Designators
+
+
+
+CRON Expressions:
+
+30 0 12 */5 * 5

@@ -11,13 +11,12 @@ public class Order {
     @Column(name = "order_id")
     private Integer orderId;
     private double amount;
-    @Enumerated(EnumType.STRING)
 
     private String fileName;
     private String fileType;
     @Lob
     private byte[] imageData;
-
+    @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus = OrderStatus.PENDING;
     public Order(){
         this.amount = 0;

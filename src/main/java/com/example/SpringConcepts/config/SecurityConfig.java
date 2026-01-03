@@ -26,6 +26,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(http->http
                         .requestMatchers("/auth/login")
                         .permitAll()
+                        .requestMatchers("/upload/file")
+                        .permitAll()
                         .requestMatchers(HttpMethod.GET,"/my_order")
                         .hasAnyRole(ROLE.CUSTOMER.name(),ROLE.ADMIN.name())
                         .anyRequest()

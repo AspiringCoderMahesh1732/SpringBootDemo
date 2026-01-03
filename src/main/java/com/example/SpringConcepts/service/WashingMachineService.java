@@ -72,10 +72,10 @@ public class WashingMachineService {
     }
 
 
-    public ResponseEntity<?> addImage(MultipartFile imageDetails,Order order) throws IOException {
-        order.setFileName(imageDetails.getOriginalFilename());
-        order.setFileType(imageDetails.getContentType());
-        order.setImageData(imageDetails.getBytes());
-        return ResponseEntity.status(HttpStatus.CREATED).body(order);
+    public ResponseEntity<?> addImage(MultipartFile file,Order order) throws IOException {
+        order.setFileName(file.getOriginalFilename());
+        order.setFileType(file.getContentType());
+        order.setImageData(file.getBytes());
+        return ResponseEntity.status(HttpStatus.CREATED).body(orderRepo.save(order));
     }
 }

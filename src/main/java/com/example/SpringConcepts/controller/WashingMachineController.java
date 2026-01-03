@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -94,9 +95,10 @@ public class WashingMachineController {
         return washingMachineService.deleteOrderById(orderId);
     }
 
-    @PostMapping("/image")
-    public ResponseEntity<?> addImage(@RequestPart("order") Order order, @RequestPart("image") MultipartFile imageDetails) throws IOException {
-        return washingMachineService.addImage(imageDetails,order);
+    @PostMapping(value="/upload/file",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> addImage( @RequestPart("image") MultipartFile file, @RequestPart("order") Order order) throws IOException {
+        return washingMachineService.addImage(file,order);
     }
 
     @ExceptionHandler(IOException.class)
